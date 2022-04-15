@@ -1,0 +1,26 @@
+<div id="vertical-container">
+    <h1>KEEP MOVING</h1>
+    <div class="workout-container">
+        <h2>My Workouts</h2>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">DATE</th>
+                    <th scope="col">EXERCISE</th>
+                    <th scope="col">DURATION (MIN)</th>
+                    <th scope="col">DELETE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let workout of workouts; let i = index">
+                    <td>{{i}}</td>
+                    <td>{{workout.date}}</td>
+                    <td>{{workout.type}}</td>
+                    <td>{{workout.duration}}</td>
+                    <td><i class="fa fa-trash" aria-hidden="true"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

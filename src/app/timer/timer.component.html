@@ -1,0 +1,14 @@
+<div id="vertical-container">
+    <h1>KEEP MOVING</h1>
+    <div class="workout-container">
+        <h2>Timer</h2>
+        <p>How long should the timer be?</p>
+        <div class="form-group">
+            <label for="min-timer">Minutes</label>
+            <label for="sec-timer">Seconds</label><br>
+            <input type="number" id="min-timer" [(ngModel)]="minutesLeft">
+            <input type="number" id="sec-timer" [(ngModel)]="secondsLeft"><br>
+            <button type="button" class="btn btn-light" (click)="startTimer()">Start</button>
+        </div>
+    </div>
+</div>
