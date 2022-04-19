@@ -3,6 +3,7 @@
     <div class="workout-container">
         <h2>Timer</h2>
         <div *ngIf="totalSecondsLeft > 0; else setTimer">
+            <!--TODO: STYLE THIS TO BE PRETTY-->
             <p id="min-timer">{{minutesLeft}}</p>
             <p id="sec-timer">{{secondsLeft}}</p>
             <button type="button" id="pause-timer-btn" class="btn btn-primary" (click)="pauseTimer()">Pause</button>
@@ -13,11 +14,11 @@
             <div class="form-group">
                 <div id="timer-field-container">
                     <div class="timer-field">
-                        <label for="min-timer-field">Minutes</label>
+                        <label for="min-timer-field"><b>Minutes</b></label>
                         <input type="number" id="min-timer-field" [(ngModel)]="minutesLeft">
                     </div>
                     <div class="timer-field">
-                        <label for="sec-timer-field">Seconds</label>
+                        <label for="sec-timer-field"><b>Seconds</b></label>
                         <input type="number" id="sec-timer-field" [(ngModel)]="secondsLeft">
                     </div>
                 </div>
