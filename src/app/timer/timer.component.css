@@ -30,17 +30,32 @@ h2 {
     margin-right: auto;
 }
 
-#min-timer, #sec-timer {
+#min-timer-field, #sec-timer-field {
     font-size: 10em;
     width: 30vw;
 }
 
+/* Gets rid of up and down arrow default design */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
       -webkit-appearance: none; 
       margin: 0; 
 }
 
+#timer-field-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
+.timer-field {
+    display: flex;
+    flex-direction: column;
+}
+
+#start-timer-btn {
+    margin: 30px 0;
+    width: 75px;
+}
 
 

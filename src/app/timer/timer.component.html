@@ -2,13 +2,28 @@
     <h1>KEEP MOVING</h1>
     <div class="workout-container">
         <h2>Timer</h2>
-        <p>How long should the timer be?</p>
-        <div class="form-group">
-            <label for="min-timer">Minutes</label>
-            <label for="sec-timer">Seconds</label><br>
-            <input type="number" id="min-timer" [(ngModel)]="minutesLeft">
-            <input type="number" id="sec-timer" [(ngModel)]="secondsLeft"><br>
-            <button type="button" class="btn btn-light" (click)="startTimer()">Start</button>
+        <div *ngIf="totalSecondsLeft > 0; else setTimer">
+            <p id="min-timer">{{minutesLeft}}</p>
+            <p id="sec-timer">{{secondsLeft}}</p>
+            <button type="button" id="pause-timer-btn" class="btn btn-primary" (click)="pauseTimer()">Pause</button>
+            <button type="button" id="stop-timer-btn" class="btn btn-danger" (click)="stopTimer()">Stop</button>
         </div>
+        <ng-template #setTimer>
+            <p>How long should the timer be?</p>
+            <div class="form-group">
+                <div id="timer-field-container">
+                    <div class="timer-field">
+                        <label for="min-timer-field">Minutes</label>
+                        <input type="number" id="min-timer-field" [(ngModel)]="minutesLeft">
+                    </div>
+                    <div class="timer-field">
+                        <label for="sec-timer-field">Seconds</label>
+                        <input type="number" id="sec-timer-field" [(ngModel)]="secondsLeft">
+                    </div>
+                </div>
+                <button type="button" id="start-timer-btn" class="btn btn-success" (click)="startTimer()">Start</button>
+            </div>
+        </ng-template>
+        
     </div>
 </div>
