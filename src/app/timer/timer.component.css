@@ -90,7 +90,13 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 20px;
 }
 
+#on-text {
+    color: #dc3545;
+}
 
+#rest-text {
+    color: #28a745;
+}
 
 
 

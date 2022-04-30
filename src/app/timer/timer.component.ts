@@ -1,5 +1,6 @@
 import { Component, OnInit, VERSION, ViewChild, ElementRef } from '@angular/core';
 // sound effects from https://www.tones7.com/ringtones/sound-effects/
+// and https://mixkit.co/free-sound-effects/beep/
 
 @Component({
   selector: 'app-timer',
@@ -24,7 +25,9 @@ export class TimerComponent implements OnInit {
   numSupersets: number = 0; // set to 0 to avoid error in for loop inside of startSupersetTimer()
   secOn: number = 0;
   secOff: number = 0;
-  on: boolean = true;
+  on: boolean = true; // indicates whether you should be currently exercising (true) or resting (false)
+  count1: number = 0; // to keep track of time you should be "on" during an exercise
+  count2: number = 0; // to keep track of time you should be "off"
 
 
   // variables for regular timer input fields
@@ -62,6 +65,12 @@ export class TimerComponent implements OnInit {
 
       this.totalSecondsLeft = this.minutesLeft*60 + this.secondsLeft;
 
+      // load audio
+      let audio = new Audio();
+      audio.src = "../../assets/remix.mp3";
+      audio.load();
+      audio.currentTime = 1.75;
+
       this.myInterval = window.setInterval(() => {
         if (!this.isPaused) {
           this.secondsLeft--;
@@ -73,10 +82,6 @@ export class TimerComponent implements OnInit {
           // if the timer has run out
           if (this.totalSecondsLeft <= 0) {
             clearInterval(this.myInterval);
-            let audio = new Audio();
-            audio.src = "../../assets/remix.mp3";
-            audio.load();
-            audio.currentTime = 1.75;
             audio.play();
             setTimeout(()=> {
               audio.pause();
@@ -116,12 +121,14 @@ export class TimerComponent implements OnInit {
   }
 
   startSupersetTimer(): void {
-    if (!this.numExercisesField?.nativeElement.value || !this.numSupersetsField?.nativeElement.value) {
+    if (!this.numExercisesField?.nativeElement.value || !this.numSupersetsField?.nativeElement.value ||
+      Number(this.numExercisesField?.nativeElement.value) === 0 || Number(this.numSupersetsField?.nativeElement.value) === 0) {
       alert("Please indicate the quantity of exercises and supsersets");
-    } else if (!this.secOnField?.nativeElement.value || !this.secOffField?.nativeElement.value) {
+    } else if (!this.secOnField?.nativeElement.value || !this.secOffField?.nativeElement.value ||
+      Number(this.secOnField?.nativeElement.value) === 0 || Number(this.secOffField?.nativeElement.value) === 0) {
       alert("Please indicate the number of seconds of work (on) and rest (off) in the superset");
     } else {
-      // all fields contain a value
+      // all fields contain a value, so start the superset timer
       this.numSupersets = Number(this.numSupersetsField?.nativeElement.value);
       this.numExercises = Number(this.numExercisesField?.nativeElement.value);
       this.secOn = Number(this.secOnField?.nativeElement.value);
@@ -129,20 +136,17 @@ export class TimerComponent implements OnInit {
       this.totalSecondsLeft = (this.secOn + this.secOff)*this.numExercises*this.numSupersets;
       this.minutesLeft = Math.floor(this.totalSecondsLeft/60);
       this.secondsLeft = this.totalSecondsLeft%60;
-      console.log(this.secOn);
-      console.log(this.secOff);
-      console.log(this.minutesLeft);
-      console.log(this.secondsLeft);
-      console.log(this.totalSecondsLeft);
 
-        // load audio
+        // beep to sound after each transition in superset
+        let beep = new Audio();
+        beep.src = "../../assets/beep.wav";
+        beep.load();
+        // audio for when superset finishes
         let audio = new Audio();
         audio.src = "../../assets/remix.mp3";
         audio.load();
         audio.currentTime = 1.75;
 
-        let count1 = 0; // counter for working out (sec on)
-        let count2 = 0; // counter for resting (sec off)
         this.myInterval = window.setInterval(() => {
 
           if (!this.isPaused) {
@@ -153,26 +157,23 @@ export class TimerComponent implements OnInit {
               this.secondsLeft = 59;
             }
             
-            if (this.on) { count1++; } 
-            else { count2++; }
+            // increase counter for appropriate state (working out vs resting)
+            if (this.on) { this.count1++; } 
+            else { this.count2++; }
+            this.totalSecondsLeft = this.minutesLeft*60 + this.secondsLeft; // variable to check when main timer finishes
 
-            this.totalSecondsLeft = this.minutesLeft*60 + this.secondsLeft;
-            if (this.totalSecondsLeft > 0 && ((this.on && count1 % this.secOn === 0) || (!this.on && count2 % this.secOff === 0))) {
+            if (this.totalSecondsLeft > 0 && ((this.on && this.count1 % this.secOn === 0) || (!this.on && this.count2 % this.secOff === 0))) {
               this.on = !this.on;
-              audio.play();
+              beep.play();
               setTimeout(()=> {
-                audio.pause();
-                audio.currentTime = 1.75;
+                beep.pause();
+                beep.currentTime = 0;
                 return;
               }, 1000);
             } 
             // if the timer has run out
             if (this.totalSecondsLeft <= 0) {
               clearInterval(this.myInterval);
-              let audio = new Audio();
-              audio.src = "../../assets/remix.mp3";
-              audio.load();
-              audio.currentTime = 1.75;
               audio.play();
               setTimeout(()=> {
                 audio.pause();
