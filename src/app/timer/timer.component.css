@@ -33,7 +33,11 @@ h2 {
 #min-timer-field, #sec-timer-field {
     font-size: 10em;
     text-align: center;
+}
 
+#exercise-timer-field, #superset-timer-field, #sec-on-timer-field, #sec-off-timer-field {
+    font-size: 5em;
+    text-align: center;
 }
 
 /* Gets rid of up and down arrow default design */

@@ -5,6 +5,8 @@
 
         <!-- IF THE TIMER IS RUNNING, DISPLAY IT -->
         <div *ngIf="totalSecondsLeft > 0; else setTimer" id="countdown-display">
+            <h2 *ngIf="on; else off">You're on for {{secOn}} seconds!</h2>
+            <ng-template #off><h2>Rest for {{secOff}} seconds</h2></ng-template>
             <div id="countdown-wrapper">
                 <h3 id="min-timer">
                     <span *ngIf="minutesLeft > 9; else padMin">{{minutesLeft}}</span>
@@ -57,11 +59,11 @@
                     <div id="timer-field-container">
                         <div class="timer-field">
                             <label for="exercise-timer-field"><b>Number of exercises in one superset</b></label>
-                            <input type="number" id="exercise-timer-field" placeholder="2" #numExercisesField>
+                            <input type="number" id="exercise-timer-field" placeholder="0" #numExercisesField>
                         </div>
                         <div class="timer-field">
                             <label for="superset-timer-field"><b>Number of supersets (times repeated)</b></label>
-                            <input type="number" id="superset-timer-field" placeholder="3" #numSupersetsField> 
+                            <input type="number" id="superset-timer-field" placeholder="0" #numSupersetsField> 
                         </div>
                     </div>
                     <div id="timer-field-container">

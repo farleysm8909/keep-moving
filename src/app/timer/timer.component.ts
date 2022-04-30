@@ -24,6 +24,7 @@ export class TimerComponent implements OnInit {
   numSupersets: number = 0; // set to 0 to avoid error in for loop inside of startSupersetTimer()
   secOn: number = 0;
   secOff: number = 0;
+  on: boolean = true;
 
 
   // variables for regular timer input fields
@@ -140,7 +141,6 @@ export class TimerComponent implements OnInit {
         audio.load();
         audio.currentTime = 1.75;
 
-        let on = true; // indicates currently working out
         let count1 = 0; // counter for working out (sec on)
         let count2 = 0; // counter for resting (sec off)
         this.myInterval = window.setInterval(() => {
@@ -153,13 +153,12 @@ export class TimerComponent implements OnInit {
               this.secondsLeft = 59;
             }
             
-            if (on) { count1++; } 
+            if (this.on) { count1++; } 
             else { count2++; }
 
             this.totalSecondsLeft = this.minutesLeft*60 + this.secondsLeft;
-            console.log(this.totalSecondsLeft);
-            if (this.totalSecondsLeft > 0 && ((on && count1 % this.secOn === 0) || (!on && count2 % this.secOff === 0))) {
-              on = !on;
+            if (this.totalSecondsLeft > 0 && ((this.on && count1 % this.secOn === 0) || (!this.on && count2 % this.secOff === 0))) {
+              this.on = !this.on;
               audio.play();
               setTimeout(()=> {
                 audio.pause();
