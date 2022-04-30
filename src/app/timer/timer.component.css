@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: Hyperspeed; /* font from https://cooltext.com/Download-Font-Hyperspeed */
-    src: url('../fonts/hyperspd.ttf');
+    src: url('../../assets/fonts/hyperspd.ttf');
 }
 
 h1 {

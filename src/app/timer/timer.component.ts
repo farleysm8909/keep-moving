@@ -67,7 +67,7 @@ export class TimerComponent implements OnInit {
 
       // load audio
       let audio = new Audio();
-      audio.src = "../../assets/remix.mp3";
+      audio.src = "../../assets/audio/remix.mp3";
       audio.load();
       audio.currentTime = 1.75;
 
@@ -139,11 +139,11 @@ export class TimerComponent implements OnInit {
 
         // beep to sound after each transition in superset
         let beep = new Audio();
-        beep.src = "../../assets/beep.wav";
+        beep.src = "../../assets/audio/beep.wav";
         beep.load();
         // audio for when superset finishes
         let audio = new Audio();
-        audio.src = "../../assets/remix.mp3";
+        audio.src = "../../assets/audio/remix.mp3";
         audio.load();
         audio.currentTime = 1.75;
 

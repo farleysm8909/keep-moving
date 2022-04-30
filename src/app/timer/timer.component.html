@@ -5,8 +5,8 @@
 
         <!-- IF THE TIMER IS RUNNING, DISPLAY IT -->
         <div *ngIf="totalSecondsLeft > 0; else setTimer" id="countdown-display">
-            <h2 *ngIf="on; else off" id="on-text">Keep moving for {{secOn - count1 % secOn}} seconds!</h2>
-            <ng-template #off><h2 id="rest-text">Rest for {{secOff - count2 % secOff}} seconds</h2></ng-template>
+            <h2 *ngIf="!isRegular && on" id="on-text">Keep moving for {{secOn - count1 % secOn}} seconds!</h2>
+            <h2 *ngIf="!isRegular && !on" id="rest-text">Rest for {{secOff - count2 % secOff}} seconds</h2>
             <div id="countdown-wrapper">
                 <h3 id="min-timer">
                     <span *ngIf="minutesLeft > 9; else padMin">{{minutesLeft}}</span>

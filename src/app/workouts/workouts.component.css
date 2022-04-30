@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: Hyperspeed; /* font from https://cooltext.com/Download-Font-Hyperspeed */
-    src: url('../fonts/hyperspd.ttf');
+    src: url('../../assets/fonts/hyperspd.ttf');
 }
 
 h1 {
@@ -30,6 +30,43 @@ h2, table {
     margin-right: auto;
 }
 
+.card {
+    background-color: #212529;
+}
+
+/*
+#vertical-container {
+    display: flex;
+    flex-direction: column;
+    background: #333;
+    height: 100%;
+    width: 90vw;
+    color: white;
+}
+
+@font-face {
+    font-family: Hyperspeed; 
+    src: url('../../assets/fonts/hyperspd.ttf');
+}
+
+h1 {
+    font-family: Hyperspeed;
+    text-align: center;
+    font-size: 5vw; vw = viewport width responsive font-size: https://www.w3schools.com/howto/howto_css_responsive_text.asp 
+    letter-spacing: 0.5em;
+}
+
+h2, table {
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.workout-container {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+*/
 
 
 
