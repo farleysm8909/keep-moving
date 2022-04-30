@@ -3,7 +3,8 @@
     color: white; 
     width: 10vw;
     min-width: 150px;
-    height: 100vh; /* vh = viewport height */
+    height: 100%;
+    min-height: 100vh; /* vh = viewport height */
 }
 
 .nav-item {

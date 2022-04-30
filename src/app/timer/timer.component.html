@@ -2,24 +2,37 @@
     <h1>KEEP MOVING</h1>
     <div class="workout-container">
         <h2>Timer</h2>
-        <div *ngIf="totalSecondsLeft > 0; else setTimer">
-            <!--TODO: STYLE THIS TO BE PRETTY-->
-            <p id="min-timer">{{minutesLeft}}</p>
-            <p id="sec-timer">{{secondsLeft}}</p>
-            <button type="button" id="pause-timer-btn" class="btn btn-primary" (click)="pauseTimer()">Pause</button>
-            <button type="button" id="stop-timer-btn" class="btn btn-danger" (click)="stopTimer()">Stop</button>
+
+        <div *ngIf="totalSecondsLeft > 0; else setTimer" id="countdown-display">
+            <div id="countdown-wrapper">
+                <h3 id="min-timer">
+                    <span *ngIf="minutesLeft > 9; else padMin">{{minutesLeft}}</span>
+                    <ng-template #padMin><span>0{{minutesLeft}}</span></ng-template>
+                </h3>
+                <h3>:</h3>
+                <h3 id="sec-timer">
+                    <span *ngIf="secondsLeft > 9; else padSec">{{secondsLeft}}</span>
+                    <ng-template #padSec><span>0{{secondsLeft}}</span></ng-template>
+                </h3>
+            </div>
+            <button *ngIf="!isPaused; else play" type="button" id="pause-timer-btn" class="btn btn-primary" (click)="pauseTimer()">Pause</button>
+                <ng-template #play>
+                    <button type="button" id="play-timer-btn" class="btn btn-primary" (click)="pauseTimer()">Play</button>
+                </ng-template>
+                <button type="button" id="stop-timer-btn" class="btn btn-danger" (click)="stopTimer()">Stop</button>
         </div>
+
         <ng-template #setTimer>
             <p>How long should the timer be?</p>
             <div class="form-group">
                 <div id="timer-field-container">
                     <div class="timer-field">
                         <label for="min-timer-field"><b>Minutes</b></label>
-                        <input type="number" id="min-timer-field" [(ngModel)]="minutesLeft">
+                        <input type="number" id="min-timer-field" placeholder="00" #minTimerField>
                     </div>
                     <div class="timer-field">
                         <label for="sec-timer-field"><b>Seconds</b></label>
-                        <input type="number" id="sec-timer-field" [(ngModel)]="secondsLeft">
+                        <input type="number" id="sec-timer-field" placeholder="00" #secTimerField> <!--had [(ngModel)]="secondsLeft"-->
                     </div>
                 </div>
                 <button type="button" id="start-timer-btn" class="btn btn-success" (click)="startTimer()">Start</button>
