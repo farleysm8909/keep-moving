@@ -4,135 +4,37 @@
         <h2>My Workouts</h2>
         <!-- Editable table -->
         <!--https://mdbootstrap.com/docs/b4/jquery/tables/editable/-->
-<div class="card">
-    <div class="card-body">
-      <div id="table" class="table-striped table-dark table-editable">
-        <span class="table-add float-right mb-3 mr-2"
-          > <!--Add click event or href to <a> tag--><a class="text-success" (click)="beginAddWorkout()"
-            ><i class=" fa fa-solid fa-plus fa-2x" aria-hidden="true"></i></a 
-        ></span> <!-- TODO MAKE UI CHANGE ON PLUS BUTTON CLICK, THEN CREATE SUBMIT BTN (ALONG WITH INPUT FIELDS) TO CREATE NEW WORKOUT
-        SUBMIT BTN TO CALL createWorkout()-->
-        <table class="table table-bordered table-responsive-md table-striped text-center">
-            <thead>
-                <tr>
-                    <th scope="col">#</th> <!-- was class=text-center-->
-                    <th scope="col">DATE</th>
-                    <th scope="col">EXERCISE</th>
-                    <th scope="col">DURATION (MIN)</th>
-                    <th scope="col">DELETE</th>
-                </tr>
-            </thead>
-          <tbody>
-            <tr *ngFor="let workout of workouts; let i = index">
-                <td>{{i}}</td>
-                <td contenteditable="true">{{workout.date}}</td>
-                <td contenteditable="true">{{workout.type}}</td>
-                <td contenteditable="true">{{workout.duration}}</td>
-                <td><span class="remove-workout-btn" (click)="removeWorkout(workout.id)"><i class="fa fa-trash" aria-hidden="true"></i></span></td>
-            </tr>
-              <!--
-            <tr>
-              <td class="pt-3-half" contenteditable="true">Aurelia Vega</td>
-              <td class="pt-3-half" contenteditable="true">30</td>
-              <td class="pt-3-half" contenteditable="true">Deepends</td>
-              <td class="pt-3-half" contenteditable="true">Spain</td>
-              <td class="pt-3-half" contenteditable="true">Madrid</td>
-              <td class="pt-3-half">
-                <span class="table-up"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
-                ></span>
-                <span class="table-down"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
-                ></span>
-              </td>
-              <td>
-                <span class="table-remove"
-                  ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                    Remove
-                  </button></span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td class="pt-3-half" contenteditable="true">Guerra Cortez</td>
-              <td class="pt-3-half" contenteditable="true">45</td>
-              <td class="pt-3-half" contenteditable="true">Insectus</td>
-              <td class="pt-3-half" contenteditable="true">USA</td>
-              <td class="pt-3-half" contenteditable="true">San Francisco</td>
-              <td class="pt-3-half">
-                <span class="table-up"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
-                ></span>
-                <span class="table-down"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
-                ></span>
-              </td>
-              <td>
-                <span class="table-remove"
-                  ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                    Remove
-                  </button></span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td class="pt-3-half" contenteditable="true">Guadalupe House</td>
-              <td class="pt-3-half" contenteditable="true">26</td>
-              <td class="pt-3-half" contenteditable="true">Isotronic</td>
-              <td class="pt-3-half" contenteditable="true">Germany</td>
-              <td class="pt-3-half" contenteditable="true">Frankfurt am Main</td>
-              <td class="pt-3-half">
-                <span class="table-up"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
-                ></span>
-                <span class="table-down"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
-                ></span>
-              </td>
-              <td>
-                <span class="table-remove"
-                  ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                    Remove
-                  </button></span
-                >
-              </td>
-            </tr>
-            <tr class="hide">
-              <td class="pt-3-half" contenteditable="true">Elisa Gallagher</td>
-              <td class="pt-3-half" contenteditable="true">31</td>
-              <td class="pt-3-half" contenteditable="true">Portica</td>
-              <td class="pt-3-half" contenteditable="true">United Kingdom</td>
-              <td class="pt-3-half" contenteditable="true">London</td>
-              <td class="pt-3-half">
-                <span class="table-up"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
-                ></span>
-                <span class="table-down"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
-                ></span>
-              </td>
-              <td>
-                <span class="table-remove"
-                  ><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">
-                    Remove
-                  </button></span
-                >
-              </td>
-            </tr>-->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <!-- Editable table -->
+        <div class="card">
+            <div class="card-body">
+              <div id="table" class="table-striped table-dark table-editable">
+                <span class="table-add float-right mb-3 mr-2"
+                  > <!--Add click event or href to <a> tag--><a class="text-success" (click)="createWorkout()"
+                    ><i class=" fa fa-solid fa-plus fa-2x" aria-hidden="true"></i></a 
+                ></span> 
+                <!-- Editable table -->
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th> <!-- was class=text-center-->
+                            <th scope="col">DATE</th>
+                            <th scope="col">EXERCISE</th>
+                            <th scope="col">DURATION (MIN)</th>
+                            <th scope="col">DELETE</th>
+                        </tr>
+                    </thead>
+                  <tbody>
+                    <tr *ngFor="let workout of workouts; let i = index">
+                        <td>{{i}}</td>
+                        <td (click)="onSelect(workout)" (mouseout)="editFeature(workout)"><input type="date" [(ngModel)]="workout.date"></td> <!--(mouseout)="editFeature(workout, i, 'date')"-->
+                        <td (click)="onSelect(workout)" (mouseout)="editFeature(workout)"><input type="text" [(ngModel)]="workout.type"></td> <!--(mouseout)="editFeature(workout, i, 'type')"-->
+                        <td (click)="onSelect(workout)" (mouseout)="editFeature(workout)"><input type="number" [(ngModel)]="workout.duration"></td> <!--(mouseout)="editFeature(workout, i, 'duration')", contenteditable="true"-->
+                        <td><span class="remove-workout-btn" (click)="removeWorkout(workout.id)"><i class="fa fa-trash" aria-hidden="true"></i></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
     </div>
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Workout } from '../workout';
 import { WorkoutService } from '../workout.service';
 
@@ -11,6 +11,15 @@ export class WorkoutsComponent implements OnInit {
   workouts: Workout[] = [];
 
   constructor(private workoutService: WorkoutService) { }
+  // variables to extract values from editable fields
+  @ViewChild(".date")
+  date?: ElementRef;
+  @ViewChild(".type")
+  type?: ElementRef;
+  @ViewChild(".dur")
+  dur?: ElementRef;
+
+  selectedWorkout?: Workout; // for editing a field
 
   ngOnInit(): void {
     this.getWorkouts();
@@ -18,18 +27,6 @@ export class WorkoutsComponent implements OnInit {
 
   getWorkouts(): void { // this is working, can manually add valid json under key "workouts" to localStorage and it will populate
     this.workoutService.getWorkouts()
-      .subscribe(workouts => this.workouts = workouts);
-  }
-
-  createWorkout(): void {
-    // create workout object here from inputfields (similar to timer)
-    let newWorkout: Workout = {
-      id: '5', //need a way to come up with unique string ids, likely using date object
-      date: '3/12/22',
-      type: 'Strength - Upper Bod Squad',
-      duration: 45
-    };
-    this.workoutService.createWorkout(newWorkout) // pass in resulting workout object into this service createWorkout() function
       .subscribe(workouts => this.workouts = workouts);
   }
 
@@ -41,8 +38,8 @@ export class WorkoutsComponent implements OnInit {
   }
 
   // handles when the plus button is clicked (updates UI)
-  // creates a blank workout to be edited by user
-  beginAddWorkout(): void {
+  // creates a blank workout to be edited by user that can then be edited
+  createWorkout(): void {
     let blankWorkout: Workout = {
       id:       (Date.now() + Math.random()).toString(),
       date:     "00/00/00",
@@ -54,6 +51,20 @@ export class WorkoutsComponent implements OnInit {
       .subscribe(workouts => this.workouts = workouts);
     // call getWorkouts to refresh UI (otherwise they aren't in order by date)
     this.getWorkouts();
+  }
+
+  editFeature(workout: Workout): void {
+    if (workout === this.selectedWorkout) { //&& !this.workouts.includes(workout)
+    // edit workouts array and update localStorage variable
+    this.workoutService.editFeature(this.workouts) // pass in resulting workout object into this service createWorkout() function
+      .subscribe(workouts => this.workouts = workouts);
+    // call getWorkouts to refresh UI (otherwise they aren't in order by date)
+    this.getWorkouts();
+    }
+  }
+
+  onSelect(workout: Workout): void {
+    this.selectedWorkout = workout;
   }
 
 }
