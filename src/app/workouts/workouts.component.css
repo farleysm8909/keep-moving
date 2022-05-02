@@ -34,6 +34,14 @@ h2, table {
     background-color: #212529;
 }
 
+.remove-workout-btn {
+    padding: 10px;
+}
+
+.remove-workout-btn:hover {
+    cursor: pointer;   
+}
+
 /*
 #vertical-container {
     display: flex;

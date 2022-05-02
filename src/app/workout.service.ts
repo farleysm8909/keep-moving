@@ -13,9 +13,16 @@ export class WorkoutService {
 
   getWorkouts(): Observable<Workout[]> {
     // add code to get workouts from localstorage instead of mock-workouts file
-    //localStorage.workouts = JSON.stringify(workouts); // to set
-    //this.workouts = JSON.parse(localStorage.workouts); // to get
     this.workouts = JSON.parse(localStorage.getItem("workouts") || '{}'); //https://stackoverflow.com/questions/46915002/argument-of-type-string-null-is-not-assignable-to-parameter-of-type-string
+    
+    // sort workouts by date
+    // adapted from https://stackoverflow.com/questions/23084782/how-sort-array-date-javascript-dd-mm-yyyy
+    // and https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    this.workouts.sort(function(a, b){
+      let aa = a.date.split('/').reverse().join();
+      let bb = b.date.split('/').reverse().join();
+      return aa < bb ? -1 : (aa > bb ? 1 : 0);
+    });
     return of(this.workouts);
   }
 
@@ -41,6 +48,9 @@ export class WorkoutService {
   removeWorkout(id: string): Observable<Workout[]> {
     // update localStorage object
     let existingWorkouts = JSON.parse(localStorage.getItem("workouts") || "{}");
+    // if there are no workouts in localStorage, alert user
+    if (existingWorkouts.length <= 0) { alert("Please add a workout first!"); }
+    // otherwise, remove workout with matching ID
     for (let i = 0; i < existingWorkouts.length; i++) {
       if (existingWorkouts[i].id === id) {
         existingWorkouts.splice(i, 1);

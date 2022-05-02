@@ -8,7 +8,7 @@
     <div class="card-body">
       <div id="table" class="table-striped table-dark table-editable">
         <span class="table-add float-right mb-3 mr-2"
-          > <!--Add click event or href to <a> tag--><a class="text-success"
+          > <!--Add click event or href to <a> tag--><a class="text-success" (click)="beginAddWorkout()"
             ><i class=" fa fa-solid fa-plus fa-2x" aria-hidden="true"></i></a 
         ></span> <!-- TODO MAKE UI CHANGE ON PLUS BUTTON CLICK, THEN CREATE SUBMIT BTN (ALONG WITH INPUT FIELDS) TO CREATE NEW WORKOUT
         SUBMIT BTN TO CALL createWorkout()-->
@@ -25,9 +25,9 @@
           <tbody>
             <tr *ngFor="let workout of workouts; let i = index">
                 <td>{{i}}</td>
-                <td>{{workout.date}}</td>
-                <td>{{workout.type}}</td>
-                <td>{{workout.duration}}</td>
+                <td contenteditable="true">{{workout.date}}</td>
+                <td contenteditable="true">{{workout.type}}</td>
+                <td contenteditable="true">{{workout.duration}}</td>
                 <td><span class="remove-workout-btn" (click)="removeWorkout(workout.id)"><i class="fa fa-trash" aria-hidden="true"></i></span></td>
             </tr>
               <!--
