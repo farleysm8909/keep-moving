@@ -4,7 +4,6 @@ import { WorkoutsComponent } from './workouts/workouts.component';
 import { TimerComponent } from './timer/timer.component';
 import { YouTubeComponent } from './you-tube/you-tube.component';
 import { MusicComponent } from './music/music.component';
-// import components to be used for routing here
 
 // note: more specific routes should come first
 const routes: Routes = [

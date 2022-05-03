@@ -1,4 +1,4 @@
-import { Component, OnInit, VERSION, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 // sound effects from https://www.tones7.com/ringtones/sound-effects/
 // and https://mixkit.co/free-sound-effects/beep/
 
@@ -9,7 +9,10 @@ import { Component, OnInit, VERSION, ViewChild, ElementRef } from '@angular/core
 })
 export class TimerComponent implements OnInit {
   isRegular: boolean = true; // default to regular timer (vs supserset timer)
-  // properties to update btn styles based on whether regular or superset is chosen
+  inputError: boolean = false; // used for displaying error message if input fields aren't filled in properly
+  errorMsg: string = "";      // error message to be displayed if inputError is true
+
+  // properties to update switch btn styles based on whether regular or superset is chosen
   regBtnStyle: string = "btn btn-light";
   supBtnStyle: string = "btn btn-dark";
 
@@ -26,8 +29,8 @@ export class TimerComponent implements OnInit {
   secOn: number = 0;
   secOff: number = 0;
   on: boolean = true; // indicates whether you should be currently exercising (true) or resting (false)
-  count1: number = 0; // to keep track of time you should be "on" during an exercise
-  count2: number = 0; // to keep track of time you should be "off"
+  onCount: number = 0; // to keep track of time you should be "on" during an exercise
+  offCount: number = 0; // to keep track of time you should be "off" (resting)
 
 
   // variables for regular timer input fields
@@ -51,10 +54,12 @@ export class TimerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  startTimer(): void {
+  startRegularTimer(): void {
     if (!this.minTimerField?.nativeElement.value && !this.secTimerField?.nativeElement.value) {
-      alert("Please set the timer!");
+      this.inputError = true;
+      this.errorMsg = "Please set the timer!";
     } else {
+      this.inputError = false;
       this.secondsLeft = Number(this.secTimerField?.nativeElement.value);
       this.minutesLeft = Number(this.minTimerField?.nativeElement.value);
 
@@ -71,18 +76,28 @@ export class TimerComponent implements OnInit {
       audio.load();
       audio.currentTime = 1.75;
 
+      // timer using setInterval to loop every second
       this.myInterval = window.setInterval(() => {
+
+        // if we aren't paused, keep counting down
         if (!this.isPaused) {
           this.secondsLeft--;
+
+          // if 60 seconds have gone by and we haven't hit 0 on timer, update min and sec fields
           if (this.totalSecondsLeft % 60 === 0 && this.totalSecondsLeft !== 0) {
             this.minutesLeft--;
             this.secondsLeft = 59;
           }
+
+          // update total seconds on timer
           this.totalSecondsLeft = this.minutesLeft*60 + this.secondsLeft;
-          // if the timer has run out
+
+          // if the timer has run out stop it and play audio
           if (this.totalSecondsLeft <= 0) {
             clearInterval(this.myInterval);
             audio.play();
+
+            // pause audio after it plays for 7 seconds
             setTimeout(()=> {
               audio.pause();
               audio.currentTime = 1.75;
@@ -104,16 +119,19 @@ export class TimerComponent implements OnInit {
     }
   }
 
+  // Pause (or play) timer based on user click & whether it is currently paused or not
   pauseTimer(): void {
     this.isPaused = !this.isPaused;
   }
 
+  // update switch btn styles on user click and change UI accordingly using isRegular
   changeToRegular(): void {
     this.isRegular = true;
     this.regBtnStyle = "btn btn-light";
     this.supBtnStyle = "btn btn-dark";
   }
 
+  // update switch btn styles on user click and change UI accordingly using isRegular
   changeToSuperset(): void {
     this.isRegular = false;
     this.supBtnStyle = "btn btn-light";
@@ -123,12 +141,15 @@ export class TimerComponent implements OnInit {
   startSupersetTimer(): void {
     if (!this.numExercisesField?.nativeElement.value || !this.numSupersetsField?.nativeElement.value ||
       Number(this.numExercisesField?.nativeElement.value) === 0 || Number(this.numSupersetsField?.nativeElement.value) === 0) {
-      alert("Please indicate the quantity of exercises and supsersets");
+        this.inputError = true;
+        this.errorMsg = "Please indicate the quantity of exercises and supersets";
     } else if (!this.secOnField?.nativeElement.value || !this.secOffField?.nativeElement.value ||
       Number(this.secOnField?.nativeElement.value) === 0 || Number(this.secOffField?.nativeElement.value) === 0) {
-      alert("Please indicate the number of seconds of work (on) and rest (off) in the superset");
+        this.inputError = true;
+        this.errorMsg = "Please indicate the number of seconds of work (on) and rest (off) in the superset";
     } else {
       // all fields contain a value, so start the superset timer
+      this.inputError = false;
       this.numSupersets = Number(this.numSupersetsField?.nativeElement.value);
       this.numExercises = Number(this.numExercisesField?.nativeElement.value);
       this.secOn = Number(this.secOnField?.nativeElement.value);
@@ -137,53 +158,62 @@ export class TimerComponent implements OnInit {
       this.minutesLeft = Math.floor(this.totalSecondsLeft/60);
       this.secondsLeft = this.totalSecondsLeft%60;
 
-        // beep to sound after each transition in superset
-        let beep = new Audio();
-        beep.src = "../../assets/audio/beep.wav";
-        beep.load();
-        // audio for when superset finishes
-        let audio = new Audio();
-        audio.src = "../../assets/audio/remix.mp3";
-        audio.load();
-        audio.currentTime = 1.75;
+      // beep to sound after each transition in superset
+      let beep = new Audio();
+      beep.src = "../../assets/audio/beep.wav";
+      beep.load();
 
-        this.myInterval = window.setInterval(() => {
+      // audio for when superset finishes
+      let audio = new Audio();
+      audio.src = "../../assets/audio/remix.mp3";
+      audio.load();
+      audio.currentTime = 1.75;
 
-          if (!this.isPaused) {
-            this.secondsLeft--;
-            // update timer when minute changes
-            if (this.totalSecondsLeft % 60 === 0 && this.totalSecondsLeft !== 0) {
-              this.minutesLeft--;
-              this.secondsLeft = 59;
-            }
-            
-            // increase counter for appropriate state (working out vs resting)
-            if (this.on) { this.count1++; } 
-            else { this.count2++; }
-            this.totalSecondsLeft = this.minutesLeft*60 + this.secondsLeft; // variable to check when main timer finishes
+      // timer using setInterval to loop every second
+      this.myInterval = window.setInterval(() => {
+        
+        // if we aren't paused, keep counting down
+        if (!this.isPaused) {
+          this.secondsLeft--;
 
-            if (this.totalSecondsLeft > 0 && ((this.on && this.count1 % this.secOn === 0) || (!this.on && this.count2 % this.secOff === 0))) {
-              this.on = !this.on;
-              beep.play();
-              setTimeout(()=> {
-                beep.pause();
-                beep.currentTime = 0;
-                return;
-              }, 1000);
-            } 
-            // if the timer has run out
-            if (this.totalSecondsLeft <= 0) {
-              clearInterval(this.myInterval);
-              audio.play();
-              setTimeout(()=> {
-                audio.pause();
-                audio.currentTime = 1.75;
-                return;
-              }, 7000);
-            }
+          // update timer when minute changes
+          if (this.totalSecondsLeft % 60 === 0 && this.totalSecondsLeft !== 0) {
+            this.minutesLeft--;
+            this.secondsLeft = 59;
           }
-        }, 1000);
+          
+          // increase counter for appropriate state (working out vs resting)
+          if (this.on) { this.onCount++; } 
+          else { this.offCount++; }
+          
+          // update total seconds on timer
+          this.totalSecondsLeft = this.minutesLeft*60 + this.secondsLeft;
+
+          // if we've reached the end of the on timer or the off timer, switch to the opposite timer and play a beep
+          if (this.totalSecondsLeft > 0 && ((this.on && this.onCount % this.secOn === 0) || (!this.on && this.offCount % this.secOff === 0))) {
+            this.on = !this.on;
+            beep.play();
+
+            // pause beep after one second
+            setTimeout(()=> {
+              beep.pause();
+              beep.currentTime = 0;
+              return;
+            }, 1000);
+          } 
+
+          // if the timer has run out play the audio for 7 sec
+          if (this.totalSecondsLeft <= 0) {
+            clearInterval(this.myInterval);
+            audio.play();
+            setTimeout(()=> {
+              audio.pause();
+              audio.currentTime = 1.75;
+              return;
+            }, 7000);
+          }
+        }
+      }, 1000);
     }
   }
-
 }

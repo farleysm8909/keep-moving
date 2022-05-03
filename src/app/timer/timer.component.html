@@ -5,8 +5,8 @@
 
         <!-- IF THE TIMER IS RUNNING, DISPLAY IT -->
         <div *ngIf="totalSecondsLeft > 0; else setTimer" id="countdown-display">
-            <h2 *ngIf="!isRegular && on" id="on-text">Keep moving for {{secOn - count1 % secOn}} seconds!</h2>
-            <h2 *ngIf="!isRegular && !on" id="rest-text">Rest for {{secOff - count2 % secOff}} seconds</h2>
+            <h2 *ngIf="!isRegular && on" id="on-text">Keep moving for {{secOn - onCount % secOn}} seconds!</h2>
+            <h2 *ngIf="!isRegular && !on" id="rest-text">Rest for {{secOff - offCount % secOff}} seconds</h2>
             <div id="countdown-wrapper">
                 <h3 id="min-timer">
                     <span *ngIf="minutesLeft > 9; else padMin">{{minutesLeft}}</span>
@@ -33,11 +33,18 @@
                 <button id="superset-timer-btn" [ngClass]="supBtnStyle" (click)="changeToSuperset()" style="border: 1px solid gray;">Superset</button>
             </div>
         
+            <!-- IF THERE IS AN ERROR DUE TO BAD USER INPUT, DISPLAY IT -->
+            <div *ngIf="inputError">
+                <!--Bootstrap alerts https://getbootstrap.com/docs/4.0/components/alerts/-->
+                <div class="alert alert-danger" role="alert">
+                    {{errorMsg}}
+                </div>
+            </div>
 
-            <!-- IF REGULAR TIMER WAS SELECTED (DEFAULT) -->
+            <!-- IF REGULAR TIMER WAS SELECTED (DEFAULT), SHOW REGULAR TIMER INPUT FIELDS -->
             <div *ngIf="isRegular; else isSuperset">
                 <div class="form-group">
-                    <div id="timer-field-container">
+                    <div class="timer-field-container">
                         <div class="timer-field">
                             <label for="min-timer-field"><b>Minutes</b></label>
                             <input type="number" id="min-timer-field" placeholder="00" #minTimerField>
@@ -47,16 +54,15 @@
                             <input type="number" id="sec-timer-field" placeholder="00" #secTimerField> <!--had [(ngModel)]="secondsLeft"-->
                         </div>
                     </div>
-                    <button type="button" id="start-timer-btn" class="btn btn-success" (click)="startTimer()">Start</button>
+                    <button type="button" id="start-timer-btn" class="btn btn-success" (click)="startRegularTimer()">Start</button>
                 </div>
             </div>
 
 
-            <!-- IF SUPERSET TIMER WAS SELECTED -->
-            <!--TODO: STYLE THIS BEAUTY, maybe find a different sound to switch it up, test it again-->
+            <!-- IF SUPERSET TIMER WAS SELECTED, SHOW SUPERSET TIMER INPUT FIELDS -->
             <ng-template #isSuperset>
                 <div class="form-group">
-                    <div id="timer-field-container">
+                    <div class="timer-field-container" id="first-timer-field-container">
                         <div class="timer-field">
                             <label for="exercise-timer-field"><b>Number of exercises in one superset</b></label>
                             <input type="number" id="exercise-timer-field" placeholder="0" #numExercisesField>
@@ -66,7 +72,7 @@
                             <input type="number" id="superset-timer-field" placeholder="0" #numSupersetsField> 
                         </div>
                     </div>
-                    <div id="timer-field-container">
+                    <div class="timer-field-container">
                         <div class="timer-field">
                             <label for="sec-on-timer-field"><b>Number of seconds on</b></label>
                             <input type="number" id="sec-on-timer-field" placeholder="00" #secOnField>
@@ -80,7 +86,6 @@
                 </div>
             </ng-template>
 
-        </ng-template>
-        
+        </ng-template>  
     </div>
 </div>

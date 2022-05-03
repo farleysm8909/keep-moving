@@ -7,7 +7,10 @@
 <!--Nav bar created using Bootstrap and Font Awesome-->
 <!--Bootstrap: https://getbootstrap.com/docs/4.0/components/navs/-->
 <!--Font Awesome: https://fontawesome.com/v4/examples/-->
+
 <nav class="nav-container" role="navigation">
+
+    <!-- DESKTOP NAVIGATION -->
     <ul class="nav flex-column" id="main-nav">
         <li class="nav-item"><a routerLink="/" class="nav-link" href="#"><i class="fa fa-home fa-fw fa-lg" aria-hidden="true"></i>&nbsp;Home</a></li>
         <li class="nav-item"><a routerLink="/timer" class="nav-link"><i class="fa fa-clock-o fa-fw fa-lg" aria-hidden="true"></i>&nbsp;Timer</a></li>
@@ -15,6 +18,8 @@
         <li class="nav-item"><a routerLink="/spotify" class="nav-link"><i class="fa fa-spotify fa-fw fa-lg" aria-hidden="true"></i>&nbsp;Spotify</a></li>
         <li class="nav-item"><a routerLink="/workouts" class="nav-link"><i class="fa fa-book fa-fw fa-lg" aria-hidden="true"></i>&nbsp;View&nbsp;Log</a></li>
     </ul>
+
+    <!-- MOBILE NAVIGATION -->
     <ul class="nav flex-column" id="mobile-nav">
         <li class="nav-item"><a routerLink="/" class="nav-link" href="#"><i class="fa fa-home fa-fw fa-lg" aria-hidden="true"></i></a></li>
         <li class="nav-item"><a routerLink="/timer" class="nav-link"><i class="fa fa-clock-o fa-fw fa-lg" aria-hidden="true"></i></a></li>
@@ -23,9 +28,3 @@
         <li class="nav-item"><a routerLink="/workouts" class="nav-link"><i class="fa fa-book fa-fw fa-lg" aria-hidden="true"></i></a></li>
     </ul>
 </nav>
-
-<!-- <nav>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/heroes">Heroes</a>
-  </nav>
-  <router-outlet></router-outlet> -->

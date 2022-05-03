@@ -2,20 +2,19 @@
     <h1>KEEP MOVING</h1>
     <div class="workout-container">
         <h2>My Workouts</h2>
-        <!-- Editable table -->
-        <!--https://mdbootstrap.com/docs/b4/jquery/tables/editable/-->
         <div class="card">
             <div class="card-body">
-              <div id="table" class="table-striped table-dark table-editable">
-                <span class="table-add float-right mb-3 mr-2"
-                  > <!--Add click event or href to <a> tag--><a class="text-success" (click)="createWorkout()"
-                    ><i class=" fa fa-solid fa-plus fa-2x" aria-hidden="true"></i></a 
-                ></span> 
+              <div id="table" class="table-striped table-dark">
+                <!-- Plus sign to add new workout -->
+                <span class="table-add float-right mb-3 mr-2">
+                    <a class="text-success" (click)="createWorkout()">
+                    <i class=" fa fa-solid fa-plus fa-2x" aria-hidden="true"></i></a>
+                </span> 
                 <!-- Editable table -->
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th scope="col">#</th> <!-- was class=text-center-->
+                            <th scope="col">#</th>
                             <th scope="col">DATE</th>
                             <th scope="col">EXERCISE</th>
                             <th scope="col">DURATION (MIN)</th>
@@ -25,9 +24,9 @@
                   <tbody>
                     <tr *ngFor="let workout of workouts; let i = index">
                         <td>{{i}}</td>
-                        <td (mouseout)="editFeature(workout)"><input type="date" [(ngModel)]="workout.date" (click)="onSelect(workout)"></td> <!--(mouseout)="editFeature(workout, i, 'date')"-->
-                        <td (mouseout)="editFeature(workout)"><input type="text" [(ngModel)]="workout.type" (click)="onSelect(workout)"></td> <!--(mouseout)="editFeature(workout, i, 'type')"-->
-                        <td (mouseout)="editFeature(workout)"><input type="number" [(ngModel)]="workout.duration" (click)="onSelect(workout)"></td> <!--(mouseout)="editFeature(workout, i, 'duration')", contenteditable="true"-->
+                        <td (mouseout)="editFeature(workout)"><input type="date" [(ngModel)]="workout.date" (click)="onSelect(workout)"></td>
+                        <td (mouseout)="editFeature(workout)"><input type="text" [(ngModel)]="workout.type" (click)="onSelect(workout)"></td>
+                        <td (mouseout)="editFeature(workout)"><input type="number" [(ngModel)]="workout.duration" (click)="onSelect(workout)"></td>
                         <td><span class="remove-workout-btn" (click)="removeWorkout(workout.id)"><i class="fa fa-trash" aria-hidden="true"></i></span></td>
                     </tr>
                   </tbody>
@@ -37,32 +36,3 @@
           </div>
     </div>
 </div>
-
-<!--
-    <div id="vertical-container">
-    <h1>KEEP MOVING</h1>
-    <div class="workout-container">
-        <h2>My Workouts</h2>
-        <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">DATE</th>
-                    <th scope="col">EXERCISE</th>
-                    <th scope="col">DURATION (MIN)</th>
-                    <th scope="col">DELETE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let workout of workouts; let i = index">
-                    <td>{{i}}</td>
-                    <td>{{workout.date}}</td>
-                    <td>{{workout.type}}</td>
-                    <td>{{workout.duration}}</td>
-                    <td><i class="fa fa-trash" aria-hidden="true"></i></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
--->

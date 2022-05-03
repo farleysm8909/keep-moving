@@ -1,7 +1,7 @@
 #vertical-container {
     display: flex;
     flex-direction: column;
-    background: #333; /* was 333 */
+    background: #333;
     height: 100%;
     width: 90vw;
     color: white;
@@ -40,17 +40,21 @@ h2 {
     text-align: center;
 }
 
-/* Gets rid of up and down arrow default design */
+/* Gets rid of up and down arrow in number input field (default design) */
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
-      -webkit-appearance: none; 
-      margin: 0; 
+    -webkit-appearance: none; 
+    margin: 0; 
 }
 
-#timer-field-container {
+.timer-field-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+#first-timer-field-container {
+    margin-bottom: 20px;
 }
 
 .timer-field {

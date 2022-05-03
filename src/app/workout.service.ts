@@ -1,7 +1,6 @@
-import { ComponentFactoryResolver, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Workout } from './workout';
-import { WORKOUTS } from './mock-workouts';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,6 @@ export class WorkoutService {
     } else {
       existingWorkouts = [];
     }
-    // add code to get workouts from localstorage instead of mock-workouts file
     this.workouts = existingWorkouts; 
     
     // sort workouts by date
@@ -33,11 +31,6 @@ export class WorkoutService {
     }
     return of(this.workouts);
   }
-
-  // getWorkout(id: number): Observable<Workout> {
-  //   const workout = WORKOUTS.find(w => w.id === id)!;
-  //   return of(workout);
-  // }
 
   createWorkout(workout: Workout): Observable<Workout[]> {
     // https://stackoverflow.com/questions/19635077/adding-objects-to-array-in-localstorage
@@ -74,45 +67,8 @@ export class WorkoutService {
   }
 
   editFeature(workouts: Workout[]): Observable<Workout[]> {
-    // update localStorage object
-    //let existingWorkouts = JSON.parse(localStorage.getItem("workouts") || "{}");
-
-    // for (let i = 0; i < existingWorkouts.length; i++) {
-    //   if (existingWorkouts[i].id === workout.id) {
-    //     existingWorkouts[i] = workout;
-    //   }
-    // }
-    
+    this.workouts = workouts;
     localStorage.setItem("workouts", JSON.stringify(workouts));
-    //this.workouts = existingWorkouts;
     return of(this.workouts);
   }
-
-/*
-  editFeature(workout: Workout, featureValue: any, featureType: string): Observable<Workout[]> {
-    // update localStorage object
-    let existingWorkouts = JSON.parse(localStorage.getItem("workouts") || "{}");
-    
-    // find workout to update
-    for (const obj of existingWorkouts) {
-      if (obj.id === workout.id) {
-        if (featureType === "date") {
-          obj.date = featureValue;
-        } else if (featureType === "type") {
-          obj.type = featureValue;
-        } else {
-          obj.duration = featureValue;
-        }
-        break;
-      }
-    }
-
-    localStorage.setItem("workouts", JSON.stringify(existingWorkouts));
-    this.workouts = existingWorkouts;
-    return of(this.workouts);
-  }
-  */
-
-  
-
 }
