@@ -8,11 +8,17 @@
 <!--Bootstrap: https://getbootstrap.com/docs/4.0/components/navs/-->
 <!--Font Awesome: https://fontawesome.com/v4/examples/-->
 <nav class="nav-container" role="navigation">
-    <ul class="nav flex-column">
-        <li class="nav-item"><a routerLink="/" class="nav-link" href="#"><i class="fa fa-home fa-fw fa-lg" aria-hidden="true"></i>&nbsp; Home</a></li>
-        <li class="nav-item"><a routerLink="/timer" class="nav-link"><i class="fa fa-clock-o fa-fw fa-lg" aria-hidden="true"></i>&nbsp; Timer</a></li>
-        <li class="nav-item"><a routerLink="/" class="nav-link" href="#"><i class="fa fa-pencil-square-o fa-fw fa-lg" aria-hidden="true"></i>&nbsp; Record</a></li>
-        <li class="nav-item"><a routerLink="/workouts" class="nav-link"><i class="fa fa-book fa-fw fa-lg" aria-hidden="true"></i>&nbsp; View Log</a></li>
+    <ul class="nav flex-column" id="main-nav">
+        <li class="nav-item"><a routerLink="/" class="nav-link" href="#"><i class="fa fa-home fa-fw fa-lg" aria-hidden="true"></i>&nbsp;Home</a></li>
+        <li class="nav-item"><a routerLink="/timer" class="nav-link"><i class="fa fa-clock-o fa-fw fa-lg" aria-hidden="true"></i>&nbsp;Timer</a></li>
+        <li class="nav-item"><a routerLink="/youtube" class="nav-link" href="#"><i class="fa fa-brands fa-youtube fa-fw fa-lg" aria-hidden="true"></i>&nbsp;YouTube</a></li>
+        <li class="nav-item"><a routerLink="/workouts" class="nav-link"><i class="fa fa-book fa-fw fa-lg" aria-hidden="true"></i>&nbsp;View&nbsp;Log</a></li>
+    </ul>
+    <ul class="nav flex-column" id="mobile-nav">
+        <li class="nav-item"><a routerLink="/" class="nav-link" href="#"><i class="fa fa-home fa-fw fa-lg" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a routerLink="/timer" class="nav-link"><i class="fa fa-clock-o fa-fw fa-lg" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a routerLink="/youtube" class="nav-link" href="#"><i class="fa fa-brands fa-youtube fa-fw fa-lg" aria-hidden="true"></i></a></li>
+        <li class="nav-item"><a routerLink="/workouts" class="nav-link"><i class="fa fa-book fa-fw fa-lg" aria-hidden="true"></i>&nbsp;</a></li>
     </ul>
 </nav>
 

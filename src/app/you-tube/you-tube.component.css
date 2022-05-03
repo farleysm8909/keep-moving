@@ -1,0 +1,62 @@
+#vertical-container {
+    display: flex;
+    flex-direction: column;
+    background: #333; /* was 333 */
+    height: 100%;
+    width: 90vw;
+    color: white;
+}
+
+@font-face {
+    font-family: Hyperspeed; /* font from https://cooltext.com/Download-Font-Hyperspeed */
+    src: url('../../assets/fonts/hyperspd.ttf');
+}
+
+h1 {
+    font-family: Hyperspeed;
+    text-align: center;
+    font-size: 5vw; /* vw = viewport width responsive font-size: https://www.w3schools.com/howto/howto_css_responsive_text.asp */ 
+    letter-spacing: 0.5em;
+}
+
+h2, table {
+    width: 100%;
+    margin: 20px 0px;
+}
+
+.workout-container {
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-container, .card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.video-container > div {
+    width: 38rem;
+    min-width: 350px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 900px) {
+    .video-container {
+        justify-content: center;
+    }
+
+    .video-container > div {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+

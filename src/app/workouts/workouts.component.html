@@ -25,9 +25,9 @@
                   <tbody>
                     <tr *ngFor="let workout of workouts; let i = index">
                         <td>{{i}}</td>
-                        <td (click)="onSelect(workout)" (mouseout)="editFeature(workout)"><input type="date" [(ngModel)]="workout.date"></td> <!--(mouseout)="editFeature(workout, i, 'date')"-->
-                        <td (click)="onSelect(workout)" (mouseout)="editFeature(workout)"><input type="text" [(ngModel)]="workout.type"></td> <!--(mouseout)="editFeature(workout, i, 'type')"-->
-                        <td (click)="onSelect(workout)" (mouseout)="editFeature(workout)"><input type="number" [(ngModel)]="workout.duration"></td> <!--(mouseout)="editFeature(workout, i, 'duration')", contenteditable="true"-->
+                        <td (mouseout)="editFeature(workout)"><input type="date" [(ngModel)]="workout.date" (click)="onSelect(workout)"></td> <!--(mouseout)="editFeature(workout, i, 'date')"-->
+                        <td (mouseout)="editFeature(workout)"><input type="text" [(ngModel)]="workout.type" (click)="onSelect(workout)"></td> <!--(mouseout)="editFeature(workout, i, 'type')"-->
+                        <td (mouseout)="editFeature(workout)"><input type="number" [(ngModel)]="workout.duration" (click)="onSelect(workout)"></td> <!--(mouseout)="editFeature(workout, i, 'duration')", contenteditable="true"-->
                         <td><span class="remove-workout-btn" (click)="removeWorkout(workout.id)"><i class="fa fa-trash" aria-hidden="true"></i></span></td>
                     </tr>
                   </tbody>

@@ -11,14 +11,7 @@ export class WorkoutsComponent implements OnInit {
   workouts: Workout[] = [];
 
   constructor(private workoutService: WorkoutService) { }
-  // variables to extract values from editable fields
-  @ViewChild(".date")
-  date?: ElementRef;
-  @ViewChild(".type")
-  type?: ElementRef;
-  @ViewChild(".dur")
-  dur?: ElementRef;
-
+  
   selectedWorkout?: Workout; // for editing a field
 
   ngOnInit(): void {
@@ -54,9 +47,9 @@ export class WorkoutsComponent implements OnInit {
   }
 
   editFeature(workout: Workout): void {
-    if (workout === this.selectedWorkout) { //&& !this.workouts.includes(workout)
+    if (workout === this.selectedWorkout) {
     // edit workouts array and update localStorage variable
-    this.workoutService.editFeature(this.workouts) // pass in resulting workout object into this service createWorkout() function
+    this.workoutService.editFeature(this.workouts) // pass in resulting workout object into this service editFeature() function
       .subscribe(workouts => this.workouts = workouts);
     // call getWorkouts to refresh UI (otherwise they aren't in order by date)
     this.getWorkouts();

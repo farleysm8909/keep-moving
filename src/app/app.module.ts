@@ -7,13 +7,15 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WorkoutsComponent } from './workouts/workouts.component';
 import { TimerComponent } from './timer/timer.component';
+import { YouTubeComponent } from './you-tube/you-tube.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     WorkoutsComponent,
-    TimerComponent
+    TimerComponent,
+    YouTubeComponent
   ],
   imports: [
     BrowserModule,
