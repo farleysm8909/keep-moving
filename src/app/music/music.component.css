@@ -19,7 +19,7 @@ h1 {
     letter-spacing: 0.5em;
 }
 
-h2 {
+h2, table {
     width: 100%;
     margin: 20px 0px;
 }
@@ -30,34 +30,7 @@ h2 {
     margin-right: auto;
 }
 
-.video-container, .card-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 
-.video-container > iframe, .card {
-    width: 38rem;
-    min-width: 350px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-iframe {
-    height: 20rem;
-    border: none;
-}
-
-@media screen and (max-width: 750px) {
-    .video-container {
-        justify-content: center;
-    }
-
-    .video-container > div {
-        width: 100%;
-    }
-}
 
 
 

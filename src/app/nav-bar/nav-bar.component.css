@@ -23,10 +23,6 @@
 }
 
 @media screen and (max-width: 900px) {
-  .nav-container {
-    width: 65px;
-  }
-
   #mobile-nav {
     display: flex;
   }
