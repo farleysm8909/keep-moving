@@ -1,0 +1,13 @@
+<div id="vertical-container">
+    <h1>KEEP MOVING</h1>
+    <div class="workout-container">
+        <h2>Workouts This Week</h2>
+        <canvas baseChart height="400"
+            [type]="'line'"
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend"
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+</div>
