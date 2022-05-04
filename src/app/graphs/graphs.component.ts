@@ -67,7 +67,7 @@ export class GraphsComponent implements OnInit {
     }
   }
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
+  public barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [
       '6',
       '5',
@@ -81,19 +81,19 @@ export class GraphsComponent implements OnInit {
       {
         data: this.duration,
         label: 'workout duration',
-        fill: true,
-        tension: 0.5,
+        //fill: true,
+        //tension: 0.5,
         borderColor: 'red',
         backgroundColor: 'rgba(255, 0, 0, 0.3)'
       }
     ]
   };
 
-  public lineChartOptions: ChartOptions<'line'> = {
+  public barChartOptions: ChartOptions<'bar'> = {
     responsive: false
   };
 
-  public lineChartLegend = true;
-  public lineChartPlugins = [];
+  public barChartLegend = true;
+  public barChartPlugins = [];
 
 }
