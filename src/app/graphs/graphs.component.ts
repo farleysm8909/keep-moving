@@ -26,6 +26,7 @@ export class GraphsComponent implements OnInit {
     // code to format today's date with the workout date strings stored in localstorage
     // adapted from https://stackoverflow.com/questions/56750189/how-to-check-if-two-dates-are-more-than-7-days-apart-using-moment-js
     // and https://phoenixnap.com/kb/how-to-get-the-current-date-and-time-javascript
+    // and https://www.itsolutionstuff.com/post/angular-line-chart-example-tutorialexample.html
     let today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth()+1;
@@ -69,28 +70,29 @@ export class GraphsComponent implements OnInit {
 
   public barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [
-      '6',
-      '5',
-      '4',
-      '3',
-      '2',
-      '1',
-      '0'
+      '6 days ago',
+      '5 days ago',
+      '4 days ago',
+      '3 days ago',
+      '2 days ago',
+      '1 day ago',
+      'today'
     ],
     datasets: [ 
       {
         data: this.duration,
-        label: 'workout duration',
+        label: 'Workout Duration',
         //fill: true,
         //tension: 0.5,
         borderColor: 'red',
-        backgroundColor: 'rgba(255, 0, 0, 0.3)'
+        backgroundColor: 'rgba(255, 0, 0, 0.7)'
       }
     ]
   };
 
   public barChartOptions: ChartOptions<'bar'> = {
-    responsive: false
+    responsive: true,
+    color: 'white'
   };
 
   public barChartLegend = true;

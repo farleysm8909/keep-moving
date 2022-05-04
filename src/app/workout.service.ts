@@ -26,7 +26,7 @@ export class WorkoutService {
       this.workouts.sort(function(a, b){
         let aa = a.date.split('/').reverse().join();
         let bb = b.date.split('/').reverse().join();
-        return aa < bb ? -1 : (aa > bb ? 1 : 0);
+        return aa > bb ? -1 : (aa < bb ? 1 : 0);
       });
     }
     return of(this.workouts);

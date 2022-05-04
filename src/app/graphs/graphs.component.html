@@ -2,8 +2,8 @@
     <h1>KEEP MOVING</h1>
     <div class="workout-container">
         <h2>Workouts This Week</h2>
-        <canvas baseChart height="400"
-            [type]="'bar'"
+        <canvas baseChart
+            [type]="'bar'" height="500"
             [data]="barChartData"
             [options]="barChartOptions"
             [legend]="barChartLegend"
@@ -11,5 +11,3 @@
         </canvas>
     </div>
 </div>
-
-<!-- TODO: Style graph a little more, maybe insert dates into graph, make ppt and written report -->
