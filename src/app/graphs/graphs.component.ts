@@ -81,7 +81,7 @@ export class GraphsComponent implements OnInit {
     datasets: [ 
       {
         data: this.duration,
-        label: 'Workout Duration',
+        label: 'Workout Duration (minutes)',
         //fill: true,
         //tension: 0.5,
         borderColor: 'red',
